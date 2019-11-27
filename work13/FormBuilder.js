@@ -23,7 +23,7 @@
             for(var k in attr) {
                 html += k + '="' + attr[k] + '" ';
             }
-            return html;
+            return html;u
         },
         item: {
             input: function(attr, option) {
