@@ -12,7 +12,7 @@ var storage = multer.diskStorage({
   destination: function(req,file,cb) {
     cb(null,'../uploads')
   },
-  filename:function(req,file,cb){
+  filename: function (req, file, cb){
     var fileFormat = (file.originalname).split(".");
     cb(null, file.fieldname + '-' + Date.now() + "." + fileFormat[fileFormat.length - 1]);
   }
@@ -65,11 +65,11 @@ app.listen(8080, () => console.log('node express 服务器已启动，监听端�
 var ws = require("nodejs-websocket")
   let id=0
 
-  var server = ws.createServer(function(conn){
+  var server = ws.createServer(function (conn) {
     id++
     conn.name = "p"+id
     broadcast(server,'有新人加入.')
-    conn.on("text",function (str){
+    conn.on("text", function (str){
           if(str.slice(0,9)=='nickname|'){
             conn.name=str.split('|')[1]
             broadcast(server,conn.name+'上线了。')
@@ -83,9 +83,10 @@ var ws = require("nodejs-websocket")
     conn.on("close",function (code,reason){
       console.log("Connection closed")
     })
-}).listen(8081,() => console.log('socket server listening on:8081'))
+}).listen(8081,()=>console.log('socket server listening on:8081'))
+
   function broadcast(server,msg){
-    server.connections.forEach(function(conn){
+    server.connections.forEach(function (conn) {
             conn.sendText(msg)
     })
   }  
